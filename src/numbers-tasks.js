@@ -1,742 +1,759 @@
 /* *******************************************************************************************
  *                                                                                           *
  * Please read the following tutorial before implementing tasks:                              *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String   *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Numbers_and_dates           *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number   *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math     *
  *                                                                                           *
  ******************************************************************************************* */
 
 /**
- * Returns the length of the given string.
+ * Returns an area of a rectangle given by width and height.
  *
- * @param {string} value - The input string to calculate the length of.
- * @return {number} - The length of the string.
- *
- * @example
- *   getStringLength('aaaaa') => 5
- *   getStringLength('b') => 1
- *   getStringLength('') => 0
- *   getStringLength() => 0
- *   getStringLength(null) => 0
- *   getStringLength(undefined) => 0
- */
-function getStringLength(value) {
-  let stringLength = 0;
-
-  const isValueString = typeof value === 'string';
-  if (isValueString) {
-    stringLength = value.length;
-  }
-
-  return stringLength;
-}
-
-/**
- * Returns true if the value is a string, otherwise returns false.
- *
- * @param {string} value - The value to check if it's a string.
- * @return {boolean} - True if the value is a string, false otherwise.
- *
- * @example
- *   isString() => false
- *   isString(null) => false
- *   isString([]) => false
- *   isString({}) => false
- *   isString('test') => true
- *   isString(new String('test')) => true
- */
-function isString(value) {
-  const stringTypeLabel = '[object String]';
-  return Object.prototype.toString.call(value) === stringTypeLabel;
-}
-
-/**
- * Returns the result of concatenation of two strings.
- *
- * @param {string} value1 - The first string to concatenate.
- * @param {string} value2 - The second string to concatenate.
- * @return {string} - The concatenated string.
- *
- * @example
- *   concatenateStrings('aa', 'bb') => 'aabb'
- *   concatenateStrings('aa', '') => 'aa'.
- *   concatenateStrings('', 'bb') => 'bb'
- */
-function concatenateStrings(value1, value2) {
-  const concatenatedStrings = value1 + value2;
-  return concatenatedStrings;
-}
-
-/**
- * Returns the first character of the given string.
- *
- * @param {string} value - The input string to extract the first character from.
- * @return {string} - The first character of the string.
- *
- * @example
- *   getFirstChar('John Doe') => 'J'
- *   getFirstChar('cat') => 'c'
- *   getFirstChar('') => ''
- */
-function getFirstChar(value) {
-  const firstCharIndex = 0;
-  const firstChar = value.charAt(firstCharIndex);
-  return firstChar;
-}
-
-/**
- * Removes leading and trailing whitespace characters from the string.
- *
- * @param {string} value - The input string to remove leading and trailing whitespaces from.
- * @return {string} - The string with leading and trailing whitespaces removed.
- *
- * @example
- *   removeLeadingAndTrailingWhitespaces('  Abracadabra') => 'Abracadabra'
- *   removeLeadingAndTrailingWhitespaces('cat ') => 'cat'
- *   removeLeadingAndTrailingWhitespaces('\t\t\tHello, World! ') => 'Hello, World!'
- */
-function removeLeadingAndTrailingWhitespaces(value) {
-  return value.trim();
-}
-
-/**
- * Removes only leading whitespace characters from the string.
- *
- * @param {string} value - The input string to remove leading whitespaces from.
- * @return {string} - The string with leading whitespaces removed.
- *
- * @example
- *   removeLeadingWhitespaces('  Abracadabra') => 'Abracadabra'
- *   removeLeadingWhitespaces('cat ') => 'cat '
- *   removeLeadingWhitespaces('\t\t\tHello, World! ') => 'Hello, World! '
- */
-function removeLeadingWhitespaces(value) {
-  return value.trimStart();
-}
-
-/**
- * Removes only trailing whitespace characters from the string.
- *
- * @param {string} value - The input string to remove trailing whitespaces from.
- * @return {string} - The string with trailing whitespaces removed.
- *
- * @example
- *   removeTrailingWhitespaces('  Abracadabra') => '  Abracadabra'
- *   removeTrailingWhitespaces('cat ') => 'cat'
- *   removeTrailingWhitespaces('\t\t\tHello, World! ') => '\t\t\tHello, World!'
- */
-function removeTrailingWhitespaces(value) {
-  return value.trimEnd();
-}
-
-/**
- * Returns a string that is repeated the specified number of times.
- *
- * @param {string} str - The string to repeat.
- * @param {number} times - The number of times to repeat the string.
- * @return {string} - The result string.
- *
- * @example
- *   repeatString('A', 5) => 'AAAAA'
- *   repeatString('cat', 3) => 'catcatcat'
- *   repeatString('', 3) => ''
- *   repeatString('abc', -2) => ''
- */
-function repeatString(value, count) {
-  let repeatingString = '';
-
-  const isCountNonNegative = count >= 0;
-  if (isCountNonNegative) {
-    repeatingString = value.repeat(count);
-  }
-
-  return repeatingString;
-}
-
-/**
- * Remove the first occurrence of a substring from a string.
- *
- * @param {string} str - The input string.
- * @param {string} value - The substring to remove from the string.
- * @return {string} - The string with the first occurrence of the substring removed.
- *
- * @example
- *   removeFirstOccurrences('To be or not to be', 'be') => 'To  or not to be'.
- *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
- *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
- */
-function removeFirstOccurrences(str, value) {
-  const lastOccurrenceIndex = str.indexOf(value);
-
-  if (lastOccurrenceIndex === -1) {
-    return str;
-  }
-
-  const removedSubstringLength = value.length;
-  const stringStartIndex = 0;
-  const stringBeforeLastOccurrence = str.slice(
-    stringStartIndex,
-    lastOccurrenceIndex
-  );
-  const stringAfterLastOccurrence = str.slice(
-    lastOccurrenceIndex + removedSubstringLength
-  );
-  const stringWithoutFirstOccurrence =
-    stringBeforeLastOccurrence + stringAfterLastOccurrence;
-  return stringWithoutFirstOccurrence;
-}
-
-/**
- * Remove the last occurrence of a substring from a string.
- *
- * @param {string} str - The input string.
- * @param {string} value - The substring to remove from the string.
- * @return {string} - The string with the last occurrence of the substring removed.
- *
- * @example
- *   removeLastOccurrences('To be or not to be', 'be') => 'To be or not to '.
- *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
- *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
- */
-function removeLastOccurrences(str, value) {
-  const lastOccurrenceIndex = str.lastIndexOf(value);
-
-  if (lastOccurrenceIndex === -1) {
-    return str;
-  }
-
-  const removedSubstringLength = value.length;
-  const stringStartIndex = 0;
-  const stringBeforeLastOccurrence = str.slice(
-    stringStartIndex,
-    lastOccurrenceIndex
-  );
-  const stringAfterLastOccurrence = str.slice(
-    lastOccurrenceIndex + removedSubstringLength
-  );
-  const stringWithoutLastOccurrence =
-    stringBeforeLastOccurrence + stringAfterLastOccurrence;
-  return stringWithoutLastOccurrence;
-}
-
-/**
- * Calculate the sum of character codes of the given string.
- *
- * @param {string} str - The input string.
- * @return {number} - The sum of character codes of the string.
- *
- * @example
- *   sumOfCodes('My String') => 861 (77 + 121 + 32 + 83 + 116 + 114 + 105 + 110 + 103 = 861)
- *   sumOfCodes('12345') => 255 (49 + 50 + 51 + 52 + 53 = 255)
- *   sumOfCodes('') => 0
- *   sumOfCodes() => 0a
- */
-function sumOfCodes(str) {
-  if (!str) return 0;
-
-  let codeSum = 0;
-  const stringLength = str.length;
-  for (let i = 0; i < stringLength; i += 1) {
-    const characterCode = str.charCodeAt(i);
-    codeSum += characterCode;
-  }
-
-  return codeSum;
-}
-
-/**
- * Checks if a string starts with a specific substring.
- *
- * @param {string} str - The input string.
- * @param {string} substr - The substring to check.
- * @return {boolean} - Returns true if str starts with substr, false otherwise.
+ * @param {number} width
+ * @param {number} height
+ * @return {number}
  *
  * @example:
- *   startsWith('Hello World', 'World') => false
- *   startsWith('Hello World', 'Hello') => true
+ *   5, 10 => 50
+ *   5, 5  => 25
  */
-function startsWith(str, substr) {
-  const isStringStarstWith = str.startsWith(substr);
-  return isStringStarstWith;
+function getRectangleArea(width, height) {
+  const rectangleArea = width * height;
+  return rectangleArea;
 }
 
 /**
- * Checks if a string ends with a specific substring.
+ * Returns a circumference of circle given by radius.
  *
- * @param {string} str - The input string.
- * @param {string} substr - The substring to check.
- * @return {boolean} - Returns true if str starts with substr, false otherwise.
+ * @param {number} radius
+ * @return {number}
  *
  * @example:
- *   endsWith('Hello World', 'World') => true
- *   endsWith('Hello World', 'Hello') => false
+ *   5    => 31.41592653589793
+ *   3.14 => 19.729201864543903
+ *   0    => 0
  */
-function endsWith(str, substr) {
-  const isStringEndstWith = str.endsWith(substr);
-  return isStringEndstWith;
+function getCircleCircumference(radius) {
+  const circleCircumference = 2 * Math.PI * radius;
+  return circleCircumference;
 }
 
 /**
- * Returns a time string in the "mm:ss" format.
+ * Returns an average of two given numbers.
  *
- * @param {number} minutes - The number of minutes (non-negative integer).
- * @param {number} seconds - The number of seconds (non-negative integer).
- * @return {string} - The time string in the "mm:ss" format.
- *
- * @example
- *   formatTime(5, 30) => "05:30"
- *   formatTime(1, 15) => "01:15"
- *   formatTime(0, 45) => "00:45"
- *   formatTime(0, 0) => "00:00"
- */
-function formatTime(minutes, seconds) {
-  const minutesString = String(minutes);
-  const secondsString = String(seconds);
-  const timeUnitLength = 2;
-  const timeUnitPad = '0';
-  const mmString = minutesString.padStart(timeUnitLength, timeUnitPad);
-  const ssString = secondsString.padStart(timeUnitLength, timeUnitPad);
-  const mmssString = `${mmString}:${ssString}`;
-  return mmssString;
-}
-
-/**
- * Returns a string in reverse order.
- *
- * @param {string} str - The input string.
- * @return {string} - The string in reverse order.
+ * @param {number} value1
+ * @param {number} value2
+ * @return {number}
  *
  * @example:
- *   reverseString('abcdef') => 'fedcba'
- *   reverseString('12345') => '54321'
+ *   5, 5  => 5
+ *  10, 0  => 5
+ *  -3, 3  => 0
  */
-function reverseString(str) {
-  const splittedString = str.split('');
-  const reversedChars = splittedString.reverse();
-  const reversedString = reversedChars.join('');
-  return reversedString;
+function getAverage(value1, value2) {
+  const bigIntNumberCount = 2n;
+  const bigIntFirstValue = BigInt(value1);
+  const bigIntSecondValue = BigInt(value2);
+  const bigIntAverage =
+    (bigIntFirstValue + bigIntSecondValue) / bigIntNumberCount;
+  const average = Number(bigIntAverage);
+  return average;
 }
 
 /**
- * Returns a string with characters in alphabetical order.
+ * Returns a distance between two points by cartesian coordinates.
  *
- * @param {string} str - The input string.
- * @return {string} - The string in alphabetical order.
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} x2
+ * @param {number} y2
+ * @return {number}
  *
  * @example:
- *   orderAlphabetically('webmaster') => 'abeemrstw'
- *   orderAlphabetically('textbook') => 'bekoottx'
- *   orderAlphabetically('abc123xyz') => '123abcxyz'
+ *   (0,0) (0,1)    => 1
+ *   (0,0) (1,0)    => 1
+ *   (-5,0) (10,-10) => 18.027756377319946
  */
-function orderAlphabetically(str) {
-  const splittedString = str.split('');
-  const alphabeticalChars = splittedString.sort();
-  const alphabeticalString = alphabeticalChars.join('');
-  return alphabeticalString;
+function getDistanceBetweenPoints(x1, y1, x2, y2) {
+  const horizontalSegment = x2 - x1;
+  const verticalSegment = y2 - y1;
+  const distanceBetweenPoints = Math.hypot(horizontalSegment, verticalSegment);
+  return distanceBetweenPoints;
 }
 
 /**
- * Checks if a given string contains a specified substring.
+ * Returns a root of linear equation a*x + b = 0 given by coefficients a and b.
  *
- * @param {string} str - The input string to search within.
- * @param {string} substring - The substring to check for in the input string.
- * @returns {boolean} - True if the input string contains the specified substring, false otherwise.
- *
- * @example
- *   containsSubstring('Hello, World!', 'World') => true
- *   containsSubstring('JavaScript is Fun', 'Python') => false
- *   containsSubstring('12345', '34') => true
- */
-function containsSubstring(str, substring) {
-  const isContains = str.includes(substring);
-  return isContains;
-}
-
-/**
- * Returns the number of vowels in the string.
- * Vowels: 'a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y'.
- *
- * @param {string} str - The input string.
- * @return {number} - The number of vowels in the string.
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
  *
  * @example:
- *   countVowels('apple')  => 2
- *   countVowels('banana') => 3
- *   countVowels('cherry') => 2
- *   countVowels('aEiOu') => 5
- *   countVowels('XYZ') => 1
+ *   5*x - 10 = 0    => 2
+ *   x + 8 = 0       => -8
+ *   5*x = 0         => 0
  */
-function countVowels(str) {
-  const inputStringLength = str.length;
-  const lowercaseString = str.toLowerCase();
-  const stringOfVowels = 'aeiouy';
-  let vowelCount = 0;
+function getLinearEquationRoot(a, b) {
+  const linearEquationRoot = -b / a;
+  return linearEquationRoot;
+}
 
-  for (let i = 0; i < inputStringLength; i += 1) {
-    const currentChar = lowercaseString[i];
-    const isCurrentCharVowel = stringOfVowels.includes(currentChar);
-    if (isCurrentCharVowel) {
-      vowelCount += 1;
+/**
+ * Returns an angle (in radians) between two vectors given by xi and yi,
+ * coordinates in Cartesian plane.
+ * See details https://en.wikipedia.org/wiki/Euclidean_vector#Representations
+ *
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} x2
+ * @param {number} y2
+ * @return {number}
+ *
+ * @example:
+ *   (1,0) (0,1)     => π/2
+ *   (0,1) (0,-1)    => π
+ *   (0,-1) (1,0)    => π/2
+ *   (0,1) (0,1)     => 0
+ */
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  const firstVectorAngle = Math.atan2(y2, x2);
+  const secondVectorAngle = Math.atan2(y1, x1);
+  const angleBetweenVectors = firstVectorAngle - secondVectorAngle;
+  const absoluteAngle = Math.abs(angleBetweenVectors);
+  return absoluteAngle;
+}
+
+/**
+ * Returns a last digit of a integer number.
+ * The input parameter will always be greater than or equal to zero and will be in decimal notation.
+ *
+ * @param {number} value
+ * @return {number}
+ *
+ * @example:
+ *   100     => 0
+ *    37     => 7
+ *     5     => 5
+ *     0     => 0
+ */
+function getLastDigit(value) {
+  const base = 10;
+  const lastDigit = value % base;
+  return lastDigit;
+}
+
+/**
+ * Returns a number by given string representation.
+ *
+ * @param {string} value
+ * @return {number}
+ *
+ * @example:
+ *    '100'     => 100
+ *     '37'     => 37
+ * '-525.5'     => -525.5
+ */
+function parseNumberFromString(value) {
+  const numberFromString = Number(value);
+  return numberFromString;
+}
+
+/**
+ * Returns a diagonal length of the rectangular parallelepiped given by its sides a,b,c.
+ *
+ * @param {number} a
+ * @param {number} b
+ * @param {number} c
+ * @return {number}
+ *
+ * @example:
+ *   1,1,1   => 1.7320508075688772
+ *   3,3,3   => 5.196152422706632
+ *   1,2,3   => 3.741657386773941
+ */
+function getParallelepipedDiagonal(a, b, c) {
+  const parallelepipedDiagonal = Math.sqrt(a ** 2 + b ** 2 + c ** 2);
+  return parallelepipedDiagonal;
+}
+
+/**
+ * Returns the number rounded to specified power of 10.
+ *
+ * @param {number} num
+ * @param {number} pow
+ * @return {number}
+ *
+ * @example:
+ *   1234, 0  => 1234
+ *   1234, 1  => 1230
+ *   1234, 2  => 1200
+ *   1234, 3  => 1000
+ *   1678, 0  => 1678
+ *   1678, 1  => 1680
+ *   1678, 2  => 1700
+ *   1678, 3  => 2000
+ */
+function roundToPowerOfTen(num, pow) {
+  const factor = 10 ** pow;
+  const roundedScaledNumber = Math.round(num / factor);
+  const roundedToPowerNumber = roundedScaledNumber * factor;
+  return roundedToPowerNumber;
+}
+
+/**
+ * Returns true is the number is prime; otherwise false.
+ * See: https://en.wikipedia.org/wiki/Primality_test
+ *
+ * @param {number} n
+ * @return {boolean}
+ *
+ * @example:
+ *   4 => false
+ *   5 => true
+ *   6 => false
+ *   7 => true
+ *   11 => true
+ *   12 => false
+ *   16 => false
+ *   17 => true
+ */
+function isPrime(n) {
+  const isNumberLessThanTwo = n < 2;
+  if (isNumberLessThanTwo) {
+    return false;
+  }
+  const isNumberTwo = n === 2;
+  if (isNumberTwo) {
+    return true;
+  }
+  const remainderOfDivisionByTwo = n % 2;
+  const isNumberEven = remainderOfDivisionByTwo === 0;
+  if (isNumberEven) {
+    return false;
+  }
+  const numberRoot = Math.sqrt(n);
+  for (let nextDivisor = 3; nextDivisor <= numberRoot; nextDivisor += 2) {
+    const isRemainderOfDivisionZero = n % nextDivisor === 0;
+    if (isRemainderOfDivisionZero) {
+      return false;
     }
   }
-
-  return vowelCount;
+  return true;
 }
 
 /**
- * Returns true if the string is a palindrome; otherwise false.
- * https://en.wikipedia.org/wiki/Palindrome
+ * Tries to convert value to number and returns it if conversion was successful;
+ * otherwise returns default value passed as a second argument.
  *
- * @param {string} str - The input string.
- * @return {boolean} - True if the string is a palindrome, false otherwise.
+ * @param {any} value
+ * @param {any} def
+ * @return {number}
+ *
+ * @example
+ *   toNumber(null, 0) => 0
+ *   toNumber('test', 0) => 0
+ *   toNumber('1', 0) => 1
+ *   toNumber(42, 0) => 42
+ *   toNumber(new Number(42), 0) => 42
+ */
+function toNumber(value, def) {
+  const valueNumber = Number(value);
+  const isValueNull = value === null;
+  const isValueNaN = Number.isNaN(valueNumber);
+  const isValueNotNumber = isValueNull || isValueNaN;
+  let convertedNumber;
+  if (isValueNotNumber) {
+    convertedNumber = def;
+  } else {
+    convertedNumber = valueNumber;
+  }
+  return convertedNumber;
+}
+
+/**
+ * Returns the cube of the given number.
+ *
+ * @param {number} num
+ * @return {number}
  *
  * @example:
- *   isPalindrome('madam') => true
- *   isPalindrome('racecar') => true
- *   isPalindrome('apple') => false
- *   isPalindrome('No lemon, no melon') => true
+ *   3  => 27
+ *   -2 => -8
+ *   0  => 0
  */
-function isPalindrome(str) {
-  const emptyString = '';
-
-  const lowercaseString = str.toLowerCase();
-  const regex = /[^a-z0-9]/g;
-  const cleanedString = lowercaseString.replace(regex, emptyString);
-
-  const cleanedChars = cleanedString.split(emptyString);
-  const reversedChars = cleanedChars.reverse();
-  const reversedString = reversedChars.join(emptyString);
-
-  const isStringPalindrome = cleanedString === reversedString;
-  return isStringPalindrome;
+function getCube(num) {
+  const cubedNumber = num ** 3;
+  return cubedNumber;
 }
 
 /**
- * Find the longest word in the sentence. If there are multiple longest words,
- * the function returns the first one encountered.
+ * Returns the Fibonacci number located at the index position.
  *
- * @param {string} sentence - The input sentence.
- * @returns {string} - The longest word in the sentence.
+ * @param {number} index
+ * @return {number}
  *
  * @example:
- *   findLongestWord('The quick brown fox') => 'quick'
- *   findLongestWord('A long and winding road') => 'winding'
- *   findLongestWord('No words here') => 'words'
+ *   0  => 0
+ *   1  => 1
+ *   2  => 1
+ *   3  => 2
+ *   10 => 55
  */
-function findLongestWord(sentence) {
-  const words = sentence.split(' ');
-  let longestWord = '';
-
-  const wordCount = words.length;
-  for (let i = 0; i < wordCount; i += 1) {
-    const currentWord = words[i];
-    const currentWordLength = currentWord.length;
-    const longestWordLength = longestWord.length;
-    const isCurrentWordLongest = currentWordLength > longestWordLength;
-
-    if (isCurrentWordLongest) {
-      longestWord = currentWord;
-    }
+function getFibonacciNumber(index) {
+  if (index === 0) {
+    return 0;
+  }
+  if (index === 1) {
+    return 1;
   }
 
-  return longestWord;
+  let previousNumber = 0;
+  let currentNumber = 1;
+
+  const startIndex = 2;
+  for (let i = startIndex; i <= index; i += 1) {
+    const nextNumber = previousNumber + currentNumber;
+    previousNumber = currentNumber;
+    currentNumber = nextNumber;
+  }
+
+  return currentNumber;
 }
 
 /**
- * Returns the string where each word is reversed.
+ * Returns the sum of all numbers from 1 to n.
  *
- * @param {string} str - The input string.
- * @return {string} - The string where each word is reversed.
+ * @param {number} n
+ * @return {number}
  *
  * @example:
- *   reverseWords('Hello World') => 'olleH dlroW'
- *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
+ *   5  => 15 // (1+2+3+4+5)
+ *   10 => 55 // (1+2+3+...+10)
+ *   1  => 1
  */
-function reverseWords(str) {
-  let reversedString = '';
-  let currentReversedWord = '';
-  const whitespace = ' ';
-  const emptyString = '';
-
-  const stringLength = str.length;
-  for (let i = 0; i < stringLength; i += 1) {
-    const currentChar = str[i];
-    const isChaNotrWitespace = currentChar !== whitespace;
-    if (isChaNotrWitespace) {
-      currentReversedWord = currentChar + currentReversedWord;
-    } else {
-      const wordWithWhitespace = currentReversedWord + whitespace;
-      reversedString += wordWithWhitespace;
-      currentReversedWord = emptyString;
-    }
-  }
-  reversedString += currentReversedWord;
-
-  return reversedString;
+function getSumToN(n) {
+  const sumToNumber = (n * (n + 1)) / 2;
+  return sumToNumber;
 }
 
 /**
- * Inverts the case of each character in the given string.
+ * Returns the sum of the digits of a given number.
  *
- * @param {string} str - The input string.
- * @returns {string} - The string with the case of each character inverted.
+ * @param {number} num
+ * @return {number}
  *
- * @example
- *   invertCase('Hello, World!') =>  'hELLO, wORLD!'
- *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
- *   invertCase('12345') => '12345'
+ * @example:
+ *   123 => 6  // (1+2+3)
+ *   202 => 4  // (2+0+2)
+ *   5   => 5  // 5
  */
-function invertCase(str) {
-  let result = '';
-  const stringLength = str.length;
-  for (let i = 0; i < stringLength; i += 1) {
-    const currentChar = str[i];
-    const uppercaseChar = currentChar.toUpperCase();
-    const lowercaseChar = currentChar.toLowerCase();
-    const isCurrentCharUppercase = currentChar === uppercaseChar;
-    result += isCurrentCharUppercase ? lowercaseChar : uppercaseChar;
-  }
-  return result;
-}
+function getSumOfDigits(num) {
+  let sumOfDigits = 0;
+  let absoluteNumber = Math.abs(num);
+  const base = 10;
 
-/**
- * Returns the result of string template and given parameters firstName and lastName.
- * Please do not use concatenation, use template string :
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings
- *
- * @param {string} firstName - The first name to include in the template.
- * @param {string} lastName - The last name to include in the template.
- * @return {string} - The formatted string generated from the template.
- *
- * @example
- *   getStringFromTemplate('John','Doe') => 'Hello, John Doe!'
- *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
- */
-function getStringFromTemplate(firstName, lastName) {
-  const stringFromTemplate = `Hello, ${firstName} ${lastName}!`;
-  return stringFromTemplate;
-}
-
-/**
- * Extracts a name from template string 'Hello, First_Name Last_Name!'.
- *
- * @param {string} value - The input value.
- * @return {string} - The name extracted from the template.
- *
- * @example
- *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
- *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
- */
-function extractNameFromTemplate(value) {
-  const stringLead = 'Hello, ';
-  const stringTail = '!';
-  return value.replace(stringLead, '').replace(stringTail, '');
-}
-
-/**
- * Remove the first and last angle brackets from tag string
- *
- * @param {string} str - The input tag.
- * @return {string} - The tag without the first and last angle brackets.
- *
- * @example
- *   unbracketTag('<div>') => 'div'
- *   unbracketTag('<span>') => 'span'
- *   unbracketTag('<a>') => 'a'
- */
-function unbracketTag(str) {
-  const leadCharIndex = 1;
-  const tailCharIndex = -1;
-  const unbracketedTag = str.slice(leadCharIndex, tailCharIndex);
-  return unbracketedTag;
-}
-
-/**
- * Extracts e-mails from single string with e-mails list delimited by semicolons
- *
- * @param {string} str - The input string.
- * @return {string[]} - The list of e-mails extracted from the string.
- *
- * @example
- *   'angus.young@gmail.com;brian.johnson@hotmail.com;bon.scott@yahoo.com'
- *   => [
- *      'angus.young@gmail.com',
- *      'brian.johnson@hotmail.com',
- *      'bon.scott@yahoo.com'
- *   ],
- *   'info@gmail.com' => ['info@gmail.com']
- */
-function extractEmails(str) {
-  const separator = ';';
-  const emailArray = str.split(separator);
-  return emailArray;
-}
-
-/**
- * Encode specified string with ROT13 cipher
- * See details:  https://en.wikipedia.org/wiki/ROT13
- *
- * @param {string} str - The input string.
- * @return {string} - The ROT13 encoded string.
- *
- * @example
- *
- *   'hello' => 'uryyb'
- *   'Why did the chicken cross the road?' => 'Jul qvq gur puvpxra pebff gur ebnq?'
- *   'Gb trg gb gur bgure fvqr!' => 'To get to the other side!'
- *   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
- *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
- *
- */
-function encodeToRot13(str) {
-  let encodedString = '';
-  const firstUppercaseIndex = 65;
-  const lastUppercaseIndex = 90;
-  const firstLowercaseIndex = 97;
-  const lastLowercaseIndex = 122;
-  const shift = 13;
-
-  const stringLength = str.length;
-  for (let i = 0; i < stringLength; i += 1) {
-    const currentChar = str[i];
-    const firstCharIndex = 0;
-    const charCode = currentChar.charCodeAt(firstCharIndex);
-    const alphabetlLetterNumber = 26;
-
-    const isCharUppercase =
-      charCode >= firstUppercaseIndex && charCode <= lastUppercaseIndex;
-    const isCharLowercase =
-      charCode >= firstLowercaseIndex && charCode <= lastLowercaseIndex;
-
-    if (isCharUppercase) {
-      const encodedCharCode =
-        ((charCode - firstUppercaseIndex + shift) % alphabetlLetterNumber) +
-        firstUppercaseIndex;
-      const encodedCharString = String.fromCharCode(encodedCharCode);
-      encodedString += encodedCharString;
-    } else if (isCharLowercase) {
-      const encodedCharCode =
-        ((charCode - firstLowercaseIndex + shift) % alphabetlLetterNumber) +
-        firstLowercaseIndex;
-      const encodedCharString = String.fromCharCode(encodedCharCode);
-      encodedString += encodedCharString;
-    } else {
-      encodedString += currentChar;
-    }
+  while (absoluteNumber > 0) {
+    const remainderOfDivision = absoluteNumber % base;
+    sumOfDigits += remainderOfDivision;
+    absoluteNumber = Math.floor(absoluteNumber / base);
   }
 
-  return encodedString;
+  return sumOfDigits;
 }
 
 /**
- * Returns playid card id.
+ * Returns true if the given number is a power of two, false otherwise.
  *
- * Playing cards initial deck includes the cards in the following order:
+ * @param {number} num
+ * @return {boolean}
  *
- *  'A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
- *  'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
- *  'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
- *  'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'
- *
- * (see https://en.wikipedia.org/wiki/Standard_52-card_deck)
- * Function returns the zero-based index of specified card in the initial deck above.
- *
- * @param {string} value - The card value.
- * @return {number} - The zero-based index.
- *
- * @example
- *   'A♣' => 0
- *   '2♣' => 1
- *   '3♣' => 2
- *     ...
- *   'Q♠' => 50
- *   'K♠' => 51
+ * @example:
+ *   4   => true
+ *   16  => true
+ *   15  => false
  */
-function getCardId(value) {
-  const deck = [
-    'A♣',
-    '2♣',
-    '3♣',
-    '4♣',
-    '5♣',
-    '6♣',
-    '7♣',
-    '8♣',
-    '9♣',
-    '10♣',
-    'J♣',
-    'Q♣',
-    'K♣',
-    'A♦',
-    '2♦',
-    '3♦',
-    '4♦',
-    '5♦',
-    '6♦',
-    '7♦',
-    '8♦',
-    '9♦',
-    '10♦',
-    'J♦',
-    'Q♦',
-    'K♦',
-    'A♥',
-    '2♥',
-    '3♥',
-    '4♥',
-    '5♥',
-    '6♥',
-    '7♥',
-    '8♥',
-    '9♥',
-    '10♥',
-    'J♥',
-    'Q♥',
-    'K♥',
-    'A♠',
-    '2♠',
-    '3♠',
-    '4♠',
-    '5♠',
-    '6♠',
-    '7♠',
-    '8♠',
-    '9♠',
-    '10♠',
-    'J♠',
-    'Q♠',
-    'K♠',
-  ];
-  const cardId = deck.indexOf(value);
-  return cardId;
+function isPowerOfTwo(num) {
+  if (num <= 0) {
+    return false;
+  }
+
+  let dividend = num;
+  const base = 2;
+
+  while (dividend % base === 0) {
+    dividend /= base;
+  }
+
+  const isDividendOne = dividend === 1;
+  return isDividendOne;
+}
+
+/**
+ * Returns the sine of a number.
+ *
+ * @param {number} num
+ * @return {number}
+ *
+ * @example:
+ *   0 => 0
+ *   Math.PI / 2 => 1
+ */
+function getSine(num) {
+  const sine = Math.sin(num);
+  return sine;
+}
+
+/**
+ * Returns a string representation of a number in a specified base (radix).
+ *
+ * @param {number} number
+ * @param {number} base
+ * @return {string}
+ *
+ * @example:
+ * 255, 16 => 'ff'
+ * 2, 2    => '10'
+ */
+function numberToStringInBase(number, base) {
+  const numberInBaseString = number.toString(base);
+  return numberInBaseString;
+}
+
+/**
+ * Returns a string representation of a number in exponential notation.
+ *
+ * @param {number} number
+ * @param {number} fractionDigits
+ * @return {string}
+ *
+ * @example:
+ * 12345, 2    => '1.23e+4'
+ */
+function toExponential(number, fractionDigits) {
+  const exponentialNumber = number.toExponential(fractionDigits);
+  return exponentialNumber;
+}
+
+/**
+ * Returns a string representation of a number in fixed-point notation.
+ *
+ * @param {number} number
+ * @param {number} fractionDigits
+ * @return {string}
+ *
+ * @example:
+ * 12345, 2    => '12345.00'
+ * 12.345, 1   => '12.3'
+ */
+function toFixed(number, fractionDigits) {
+  const fixedPointNumber = number.toFixed(fractionDigits);
+  return fixedPointNumber;
+}
+
+/**
+ * Returns a string representation of a number in normal (fixed-point or exponential)
+ * notation rounded to precision significant digits.
+ *
+ * @param {number} number
+ * @param {number} precision
+ * @return {string}
+ *
+ * @example:
+ * 12345, 7    => '12345.00'
+ * 12.345, 4   => '12.35'
+ */
+function toPrecision(number, precision) {
+  const precisionNumber = number.toPrecision(precision);
+  return precisionNumber;
+}
+
+/**
+ * Returns the primitive value of a Number object.
+ *
+ * @param {number} number
+ * @return {number}
+ *
+ * @example:
+ * new Number(5) => 5
+ * Number(-5)    => -5
+ */
+function getNumberValue(number) {
+  const primitive = number.valueOf();
+  return primitive;
+}
+
+/**
+ * Returns a boolean value indicating whether the parameter is a number or not.
+ *
+ * @param {number} number
+ * @return {boolean}
+ *
+ * @example:
+ * Infinity => false
+ * NaN      => false
+ * 0        => true
+ * 'a' / 1  => false
+ * 'a'      => false
+ * 5        => true
+ * '5'      => false
+ */
+function isNumber(number) {
+  const isNumberFinite = Number.isFinite(number);
+  return isNumberFinite;
+}
+
+/**
+ * Returns a boolean value indicating whether a number is an integer or not.
+ *
+ * @param {number} number
+ * @return {boolean}
+ *
+ * @example:
+ * 5    => true
+ * 5.1  => false
+ * '5'  => false
+ */
+function isInteger(number) {
+  const isNumberInteger = Number.isInteger(number);
+  return isNumberInteger;
+}
+
+/**
+ * Returns a floating point number or, if the number cannot be parsed from the argument, returns NaN.
+ *
+ * @param {string} str
+ * @return {number | NaN}
+ *
+ * @example:
+ * '4.567abcdefgh' => 4.567
+ * 'abcdefgh'      => NaN
+ */
+function getFloatOnString(str) {
+  const floatNumber = Number.parseFloat(str);
+  return floatNumber;
+}
+
+/**
+ * Returns an integer of the specified base or, if the number cannot be parsed
+ * from the argument, returns NaN.
+ *
+ * @param {string} str
+ * @param {number} base
+ * @return {number | NaN}
+ *
+ * @example:
+ * '4.567abcdefgh', 10  => 4
+ * 'abcdefgh', 10       => NaN
+ * '1.234', 2           => 1
+ * '10', 8              => 8
+ */
+function getIntegerOnString(str, base) {
+  const integerInBase = Number.parseInt(str, base);
+  return integerInBase;
+}
+
+/**
+ * Returns whether a number is a safe integer.
+ *
+ * @param {number} number
+ * @return {boolean}
+ *
+ * @example:
+ * 10       => true
+ * 3.5      => false
+ * 2 ** 53  => false
+ */
+function isSafeInteger(number) {
+  const isNumberSafeInteger = Number.isSafeInteger(number);
+  return isNumberSafeInteger;
+}
+
+/**
+ * Returns the smallest integer less than or equal to a given number.
+ *
+ * @param {number} number
+ * @return {number}
+ *
+ * @example:
+ * 5.9  => 5
+ * -5.1 => -6
+ */
+function roundToSmallestInteger(number) {
+  const smallestInteger = Math.floor(number);
+  return smallestInteger;
+}
+
+/**
+ * Returns the largest integer greater than or equal to a given number.
+ *
+ * @param {number} number
+ * @return {number}
+ *
+ * @example:
+ * 5.1  => 6
+ * -5.9 => -5
+ */
+function roundToLargestInteger(number) {
+  const largestInteger = Math.ceil(number);
+  return largestInteger;
+}
+
+/**
+ * Returns the value of a number rounded to the nearest integer.
+ *
+ * @param {number} number
+ * @return {number}
+ *
+ * @example:
+ * 5.5  => 6
+ * 5.4  => 5
+ * -5.5 => -5
+ */
+function roundToNearestInteger(number) {
+  const roundedNumber = Math.round(number);
+  return roundedNumber;
+}
+
+/**
+ * Returns the integer part of a number by removing any fractional digits.
+ *
+ * @param {number} number
+ * @return {number}
+ *
+ * @example:
+ * 5.5  => 5
+ * 5.4  => 5
+ * -5.5 => -5
+ */
+function getIntegerPartNumber(number) {
+  const integerPart = Math.trunc(number);
+  return integerPart;
+}
+
+/**
+ * Returns the sum of numbers.
+ *
+ * @param {number} x1
+ * @param {number} x2
+ * @param {number} x3
+ * @returns {number}
+ *
+ * @example:
+ * 1, 2, 3       => 6
+ * 0.1, 0.2, 0.3 => 0.6
+ */
+function getSumOfNumbers(x1, x2, x3) {
+  const sum = x1 + x2 + x3;
+  const digitCount = 12;
+  const fixedSum = Number(sum.toFixed(digitCount));
+  return fixedSum;
+}
+
+/**
+ * Returns the largest number.
+ *
+ * @param {number} firstNumber
+ * @param {number} secondNumber
+ * @return {number}
+ *
+ * @example:
+ * 1, 2   => 2
+ * -5, -6 => -5
+ * 0, 5   => 5
+ */
+function getMaxNumber(firstNumber, secondNumber) {
+  const maxNumber = Math.max(firstNumber, secondNumber);
+  return maxNumber;
+}
+
+/**
+ * Returns a random integer in the range from min to max.
+ *
+ * @param {number} min
+ * @param {number} max
+ * @return {number}
+ *
+ * @example:
+ * 1, 2  => 1 | 2
+ * -5, 0 => -5 | -4 | -3 | -2 | -1 | 0
+ * -1, 1 => -1 | 0 | 1
+ */
+function getRandomInteger(min, max) {
+  const randomInteger = Math.floor(Math.random() * (max - min + 1)) + min;
+  return randomInteger;
+}
+
+/**
+ * Returns the length of the hypotenuse of a right triangle.
+ *
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ *
+ * @example:
+ * 3, 4 => 5
+ */
+function getHypotenuse(a, b) {
+  const hypotenuse = Math.hypot(a, b);
+  return hypotenuse;
+}
+
+/**
+ * Returns count of odd numbers from zero to the resulting number.
+ * The resulting number is taken into account.
+ *
+ * @param {number} number
+ * @return {number}
+ *
+ * @example:
+ * 4  => 2
+ * 5  => 3
+ * 10 => 5
+ * 15 => 8
+ */
+function getCountOfOddNumbers(number) {
+  const absoluteNumber = Math.abs(number);
+  const oddNumberCount = Math.floor((absoluteNumber + 1) / 2);
+  return oddNumberCount;
 }
 
 module.exports = {
-  getStringLength,
-  isString,
-  concatenateStrings,
-  getFirstChar,
-  removeLeadingAndTrailingWhitespaces,
-  removeLeadingWhitespaces,
-  removeTrailingWhitespaces,
-  repeatString,
-  removeFirstOccurrences,
-  removeLastOccurrences,
-  sumOfCodes,
-  endsWith,
-  startsWith,
-  formatTime,
-  reverseString,
-  countVowels,
-  orderAlphabetically,
-  containsSubstring,
-  isPalindrome,
-  findLongestWord,
-  reverseWords,
-  invertCase,
-  getStringFromTemplate,
-  extractNameFromTemplate,
-  extractEmails,
-  unbracketTag,
-  encodeToRot13,
-  getCardId,
+  getRectangleArea,
+  getCircleCircumference,
+  getAverage,
+  getDistanceBetweenPoints,
+  getLinearEquationRoot,
+  getAngleBetweenVectors,
+  getLastDigit,
+  parseNumberFromString,
+  getParallelepipedDiagonal,
+  roundToPowerOfTen,
+  isPrime,
+  toNumber,
+  getCube,
+  getFibonacciNumber,
+  getSumToN,
+  getSumOfDigits,
+  isPowerOfTwo,
+  getSine,
+  numberToStringInBase,
+  isSafeInteger,
+  roundToLargestInteger,
+  roundToSmallestInteger,
+  roundToNearestInteger,
+  getSumOfNumbers,
+  isNumber,
+  isInteger,
+  toExponential,
+  toFixed,
+  toPrecision,
+  getNumberValue,
+  getFloatOnString,
+  getIntegerOnString,
+  getIntegerPartNumber,
+  getMaxNumber,
+  getRandomInteger,
+  getHypotenuse,
+  getCountOfOddNumbers,
 };
